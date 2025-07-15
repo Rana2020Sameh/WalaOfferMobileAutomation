@@ -1,0 +1,19 @@
+[
+  {
+    "username": "validUser",
+    "password": "validPassword",
+    "expectedResult": "success"
+  },
+  {
+    "username": "invalidUser",
+    "password": "wrongPassword",
+    "expectedResult": "failure",
+    "errorMessage": "Invalid username or password"
+  },
+  {
+    "username": "emptyUser",
+    "password": "password123",
+    "expectedResult": "failure",
+    "errorMessage": "Please enter username"
+  }
+]
