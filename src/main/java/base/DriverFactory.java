@@ -2,14 +2,25 @@ package base;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
+import io.appium.java_client.flutter.FlutterDriverOptions;
+import io.appium.java_client.flutter.SupportsGestureOnFlutterElements;
+import io.appium.java_client.flutter.android.FlutterAndroidDriver;
 
 import java.net.URL;
 
 public class DriverFactory {
     public static AndroidDriver driver;
     //public static FlutterFinder flutterFinder;
+    public static FlutterDriverOptions flutterDriverOptions;
+    public static FlutterAndroidDriver flutterAndroidDriver;
 
 
+    public static SupportsGestureOnFlutterElements getFlutterDriver() {
+        if (flutterAndroidDriver == null) {
+            throw new IllegalStateException("Flutter driver is not initialized. Call initialize() first.");
+        }
+        return flutterAndroidDriver;
+    }
 
     public static void initialize() throws Exception {
 // Replaced deprecated MobileCapabilityType with modern UiAutomator2Options or DesiredCapabilities but uiAutomator is rocommended
@@ -25,13 +36,13 @@ UiAutomator2Options options = new UiAutomator2Options();
         options.setCapability("shouldUseCompactResponses", false);
         options.setCapability("elementResponseAttributes", "type,label");
 
-        driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), options);
-      //  flutterFinder = new FlutterFinder(driver);
+      //  driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), options);
+        flutterAndroidDriver= new FlutterAndroidDriver(new URL("http://localhost:4723/wd/hub"), options);
     }
 
     public static void quit() {
-        if (driver != null) {
-            driver.quit();
+        if (flutterAndroidDriver != null) {
+            flutterAndroidDriver.quit();
         }
 
     }

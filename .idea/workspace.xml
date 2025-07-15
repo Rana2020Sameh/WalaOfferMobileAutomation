@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33f1f696-be9c-4a9b-b827-bfa6c776a12d" name="Changes" comment="initial commit for framework" />
+    <list default="true" id="33f1f696-be9c-4a9b-b827-bfa6c776a12d" name="Changes" comment="initial commit for framework">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/base/DriverFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/base/DriverFactory.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
