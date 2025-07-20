@@ -10,7 +10,6 @@ import java.net.URL;
 
 public class DriverFactory {
     public static AndroidDriver driver;
-    //public static FlutterFinder flutterFinder;
     public static FlutterDriverOptions flutterDriverOptions;
     public static FlutterAndroidDriver flutterAndroidDriver;
 
