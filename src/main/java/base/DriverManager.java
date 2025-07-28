@@ -8,7 +8,7 @@ import io.appium.java_client.flutter.android.FlutterAndroidDriver;
 
 import java.net.URL;
 
-public class DriverFactory {
+public class DriverManager {
     public static AndroidDriver driver;
     public static FlutterDriverOptions flutterDriverOptions;
     public static FlutterAndroidDriver flutterAndroidDriver;
