@@ -17,3 +17,62 @@
     "errorMessage": "Please enter username"
   }
 ]
+
+
+
+
+{
+  "loginTestData": [
+    {
+      "testCase": "Valid Login",
+      "email": "valid.user@example.com",
+      "password": "ValidPass123!",
+      "expectedResult": true,
+      "description": "Login with valid credentials"
+    },
+    {
+      "testCase": "Invalid Email",
+      "email": "invalid-email",
+      "password": "ValidPass123!",
+      "expectedResult": false,
+      "description": "Login with invalid email format"
+    },
+    {
+      "testCase": "Empty Password",
+      "email": "valid.user@example.com",
+      "password": "",
+      "expectedResult": false,
+      "description": "Login with empty password"
+    },
+    {
+      "testCase": "Invalid Credentials",
+      "email": "wrong.user@example.com",
+      "password": "WrongPass123!",
+      "expectedResult": false,
+      "description": "Login with invalid credentials"
+    },
+    {
+      "testCase": "SQL Injection Attempt",
+      "email": "admin@example.com'; DROP TABLE users; --",
+      "password": "password",
+      "expectedResult": false,
+      "description": "Security test for SQL injection"
+    }
+  ],
+  "userData": [
+    {
+      "userId": "user001",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john.doe@example.com",
+      "role": "standard_user"
+    },
+    {
+      "userId": "user002",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "email": "jane.smith@example.com",
+      "role": "admin_user"
+    }
+  ]
+}

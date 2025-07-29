@@ -5,3 +5,26 @@
 <classes/>
 </test>
 </suite>
+
+
+<suite name="Walaplus App Test Suite" verbose="1">
+    <parameter name="browser" value="Android"/>
+    
+    <test name="Login Tests">
+        <classes>
+            <class name="tests.LoginTests"/>
+        </classes>
+    </test>
+    
+    <test name="Smoke Tests" parallel="methods" thread-count="2">
+        <classes>
+            <class name="tests.SmokeTests"/>
+        </classes>
+    </test>
+    
+    <test name="Regression Tests">
+        <packages>
+            <package name="tests.regression"/>
+        </packages>
+    </test>
+</suite>
