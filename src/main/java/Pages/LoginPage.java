@@ -1,58 +1,49 @@
 package Pages;
 
 import base.BasePage;
-import io.appium.java_client.AppiumBy;
-import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class LoginPage extends BasePage {
-    //private FlutterFinder flutterFinder = DriverFactory.flutterFinder;
-
-    // Using AppiumBy.ByFlutterFinder for Flutter elements
-    // Always use Flutter Inspector (DevTools) to get the correct keys/semantics
-    private final By USERNAME_FIELD;
-    private final By PASSWORD_FIELD = appiumBy.xpath("Password input field");
-    private final By LOGIN_BUTTON = AppiumBy.accessibilityId("loginButton");
-
-    private final By ERROR_MESSAGE = AppiumBy.xpath("Invalid credentials message");
-    // You can also use @AndroidFindBy/@iOSXCUITFindBy if elements have platform-specific accessibility IDs
-    // @AndroidFindBy(accessibility = "username_input")
-    // @iOSXCUITFindBy(accessibility = "username_field")
-    // private WebElement usernameField;
-
-    public LoginPage(AppiumDriver driver) {
-        super(driver);
-        USERNAME_FIELD = AppiumBy.xpath("Username input field");
+    
+    // Flutter element locators using keys
+    private static final String EMAIL_FIELD_KEY = "email_field";
+    private static final String PASSWORD_FIELD_KEY = "password_field";
+    private static final String LOGIN_BUTTON_KEY = "login_button";
+    private static final String ERROR_MESSAGE_KEY = "error_message";
+    
+    public void enterEmail(String email) {
+        WebElement emailField = findFlutterElement("key", EMAIL_FIELD_KEY);
+        sendText(emailField, email);
     }
-
-    public void enterUsername(String username) {
-        sendKeys(USERNAME_FIELD, username);
-    }
-
+    
     public void enterPassword(String password) {
-        sendKeys(PASSWORD_FIELD, password);
+        WebElement passwordField = findFlutterElement("key", PASSWORD_FIELD_KEY);
+        sendText(passwordField, password);
     }
-
-    public HomePage clickLoginButton() {
-        click(LOGIN_BUTTON);
-        return new HomePage(driver); // Assuming successful login navigates to HomePage
+    
+    public void clickLoginButton() {
+        WebElement loginButton = findFlutterElement("key", LOGIN_BUTTON_KEY);
+        clickElement(loginButton);
     }
-
+    
     public String getErrorMessage() {
-        return getText(ERROR_MESSAGE);
+        WebElement errorElement = findFlutterElement("key", ERROR_MESSAGE_KEY);
+        return getElementText(errorElement);
     }
-
-    public HomePage login(String username, String password) {
-        enterUsername(username);
+    
+    public HomePage performLogin(String email, String password) {
+        enterEmail(email);
         enterPassword(password);
-        return clickLoginButton();
+        clickLoginButton();
+        return new HomePage();
     }
-
+    
     public boolean isLoginPageDisplayed() {
-        return waitForElementVisibility(LOGIN_BUTTON).isDisplayed();
+        try {
+            WebElement emailField = findFlutterElement("key", EMAIL_FIELD_KEY);
+            return emailField.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
     }
-
-    // Locators
-
-
 }

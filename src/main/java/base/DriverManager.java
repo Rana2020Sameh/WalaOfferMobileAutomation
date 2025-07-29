@@ -1,48 +1,38 @@
 package base;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.options.UiAutomator2Options;
-import io.appium.java_client.flutter.FlutterDriverOptions;
-import io.appium.java_client.flutter.SupportsGestureOnFlutterElements;
-import io.appium.java_client.flutter.android.FlutterAndroidDriver;
-
+import io.appium.java_client.flutter.FlutterFinder;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.URL;
+import java.time.Duration;
 
-public class DriverFactory {
-    public static AndroidDriver driver;
-    public static FlutterDriverOptions flutterDriverOptions;
-    public static FlutterAndroidDriver flutterAndroidDriver;
-
-
-    public static SupportsGestureOnFlutterElements getFlutterDriver() {
-        if (flutterAndroidDriver == null) {
-            throw new IllegalStateException("Flutter driver is not initialized. Call initialize() first.");
+public class DriverManager {
+    private static ThreadLocal<AppiumDriver> driver = new ThreadLocal<>();
+    private static final String APPIUM_SERVER_URL = "http://127.0.0.1:4723/wd/hub";
+    
+    public static void initializeDriver(DesiredCapabilities capabilities) {
+        try {
+            AppiumDriver appiumDriver = new AndroidDriver(new URL(APPIUM_SERVER_URL), capabilities);
+            appiumDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+            driver.set(appiumDriver);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize driver", e);
         }
-        return flutterAndroidDriver;
     }
-
-    public static void initialize() throws Exception {
-// Replaced deprecated MobileCapabilityType with modern UiAutomator2Options or DesiredCapabilities but uiAutomator is rocommended
-UiAutomator2Options options = new UiAutomator2Options();
-        options.setPlatformName("Android");
-        options.setDeviceName("emulator-5554"); // or your device name
-        options.setAppPackage("your.flutter.app.package");
-        options.setAppActivity("your.flutter.app.MainActivity");
-        options.setAutomationName("Flutter");
-        options.setApp("/path/to/flutter-app.apk");
-
-        // Additional Flutter-specific options
-        options.setCapability("shouldUseCompactResponses", false);
-        options.setCapability("elementResponseAttributes", "type,label");
-
-      //  driver = new AndroidDriver(new URL("http://localhost:4723/wd/hub"), options);
-        flutterAndroidDriver= new FlutterAndroidDriver(new URL("http://localhost:4723/wd/hub"), options);
+    
+    public static AppiumDriver getDriver() {
+        return driver.get();
     }
-
-    public static void quit() {
-        if (flutterAndroidDriver != null) {
-            flutterAndroidDriver.quit();
+    
+    public static void quitDriver() {
+        if (driver.get() != null) {
+            driver.get().quit();
+            driver.remove();
         }
-
+    }
+    
+    public static FlutterFinder getFlutterFinder() {
+        return new FlutterFinder(getDriver());
     }
 }
