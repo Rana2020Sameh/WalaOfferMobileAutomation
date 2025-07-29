@@ -36,3 +36,11 @@ build/
 
 ### Mac OS ###
 .DS_Store"*.apk" 
+
+
+# APK#
+"/src/test/resources/apk/app-qa-release-universal.apk"
+
+
+*.apk
+

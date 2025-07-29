@@ -53,3 +53,4 @@ public abstract class BasePage {
         waitForElementToBeVisible(element);
         return element.getText();
     }
+}
