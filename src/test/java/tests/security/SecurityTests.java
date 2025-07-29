@@ -1,8 +1,8 @@
 package tests.security;
-import framework.base.BaseTest;
-import framework.utils.ReportUtils;
-import framework.utils.APIUtils;
-import pages.LoginPage;
+import base.BaseTest;
+import utils.ReportUtils;
+import utils.APIUtils;
+import LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
