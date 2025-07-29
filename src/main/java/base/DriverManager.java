@@ -2,7 +2,6 @@ package base;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.flutter.FlutterFinder;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.URL;
 import java.time.Duration;
@@ -31,7 +30,7 @@ public class DriverManager {
             driver.remove();
         }
     }
-    
+
     public static FlutterFinder getFlutterFinder() {
         return new FlutterFinder(getDriver());
     }

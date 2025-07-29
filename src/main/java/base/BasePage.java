@@ -1,8 +1,7 @@
 package base;
 
-
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.flutter.FlutterFinder;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,15 +9,13 @@ import java.time.Duration;
 
 public abstract class BasePage {
     protected AppiumDriver driver;
-    protected FlutterFinder finder;
     protected WebDriverWait wait;
-    
+    protected AppiumBy appiumBy;
+        
     public BasePage() {
         this.driver = DriverManager.getDriver();
-        this.finder = DriverManager.getFlutterFinder();
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     }
-    
     protected void waitForElementToBeVisible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
@@ -26,17 +23,16 @@ public abstract class BasePage {
     protected void waitForElementToBeClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
-    
     protected WebElement findFlutterElement(String key, String keyValue) {
         switch (key.toLowerCase()) {
             case "text":
-                return driver.findElement(finder.text(keyValue));
+                return driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"" + keyValue + "\")"));
             case "key":
-                return driver.findElement(finder.byValueKey(keyValue));
-            case "type":
-                return driver.findElement(finder.byType(keyValue));
-            case "tooltip":
-                return driver.findElement(finder.byTooltip(keyValue));
+                return driver.findElement(AppiumBy.accessibilityId(keyValue));
+                case "xpath":
+                return driver.findElement(appiumBy.xpath(keyValue));
+                case "ID":
+                return driver.findElement(appiumBy.id(keyValue));
             default:
                 throw new IllegalArgumentException("Unsupported finder type: " + key);
         }
@@ -57,4 +53,3 @@ public abstract class BasePage {
         waitForElementToBeVisible(element);
         return element.getText();
     }
-}
