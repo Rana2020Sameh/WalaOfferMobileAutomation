@@ -1,7 +1,8 @@
 package utils;
 
 
-import framework.base.DriverManager;
+
+import base.DriverManager;
 import io.appium.java_client.AppiumDriver;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
