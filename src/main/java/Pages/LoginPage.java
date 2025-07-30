@@ -77,6 +77,7 @@ public void pressNextinOnboarding()
          MobileFileLocator=locators.getProperty("mobileNm");
           mobileNumberField =  driver.findElement(By.xpath(MobileFileLocator));
         mobileNumberField.click();
+        mobileNumberField.clear();
         mobileNumberField.sendKeys(number);
     }
     
