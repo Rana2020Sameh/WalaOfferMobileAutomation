@@ -81,6 +81,17 @@ public void pressNextinOnboarding()
         mobileNumberField.sendKeys(number);
     }
     
+public void loginFun()
+{
+    allowPermmision();
+    startNow();
+    pressNextinOnboarding();
+    enterMobileNumber("576537132");
+
+}
+
+
+
     public void enterEmail(String email) {
         WebElement emailField = findFlutterElement("key", EMAIL_FIELD_KEY);
         sendText(emailField, email);
