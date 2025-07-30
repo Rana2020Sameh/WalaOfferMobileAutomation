@@ -1,11 +1,16 @@
 package Pages;
 
 import base.BasePage;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
+
+import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage<MobileElement> extends BasePage {
     
@@ -26,12 +31,51 @@ public class LoginPage<MobileElement> extends BasePage {
     private static final String  START_NOW_BUTTON="start_now_button";
     private static final String NEXT_BUTTON="newx_button";
     private static final String LOGIN_BUTTON="login_button";
-    
+    private static final String MobileFileLocator;
+    private static final String AllowPermmisionId;
+    private static final WebElement  mobileNumberField ;
+    private static final WebElement startNowButton;
+    private static final String startNowLocator;
+    private static final WebElement nextButton;
+    private static final String nextLocator;
+public void allowPermmision()
+{
+    AllowPermmisionId=locators.getProperty("allowButtonID");
+    driver.findElement(By.id(AllowPermmisionId));
+    //driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_button")).click();
+}
+public void startNow()
+{
+    startNowLocator=locators.getProperty("startNow.Xpath");
+    startNowButton=driver.findElement(appiumBy.xpath(startNowLocator));
+    waitforpresenceOfElementLocated(startNowButton);
+    startNowButton.click();
+
+}
+public void pressNextinOnboarding()
+{
+    nextLocator=locators.getProperty("NextButtonAccessibiltyID");
+    for (int i = 0; i < 2; i++) {
+
+        try {
+            nextButton = driver.findElement(appiumBy.accessibilityId(nextLocator));
+            waitForElementToBeClickable(nextButton);
+            nextButton.click();
+            Thread.sleep(1000); 
+          
+        }
+        catch (Exception e) {
+            System.out.println("Next button not found at iteration " + i);
+            break;
+        }
+    }
+
+}
 
     public void enterMobileNumber(String number) {
         //to read xpath value for mobile number filed from Locators Properties file
-        String MobileFileLocator=locators.getProperty("mobileNm");
-        WebElement  mobileNumberField =  driver.findElement(By.xpath(MobileFileLocator));
+         MobileFileLocator=locators.getProperty("mobileNm");
+          mobileNumberField =  driver.findElement(By.xpath(MobileFileLocator));
         mobileNumberField.click();
         mobileNumberField.sendKeys(number);
     }

@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -35,10 +36,14 @@ public abstract class BasePage {
     protected void waitForElementToBeVisible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
-    
+    protected void waitforpresenceOfElementLocated(WebElement element)
+    {
+        wait.until(ExpectedConditions.presenceOfElementLocated((By) element));
+    }
     protected void waitForElementToBeClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
+    
     protected WebElement findFlutterElement(String key, String keyValue) {
         switch (key.toLowerCase()) {
             case "text":
