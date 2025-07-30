@@ -2,12 +2,18 @@ package Pages;
 
 
 import base.BasePage;
+import io.appium.java_client.AppiumDriver;
 import utils.FlutterUtils;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class HomePage extends BasePage {
     
+    public HomePage(AppiumDriver driver) {
+        super(driver);
+        //TODO Auto-generated constructor stub
+    }
+
     // Flutter widget keys
     private static final String HOME_TITLE_KEY = "home_title";
     private static final String USER_PROFILE_KEY = "user_profile_button";

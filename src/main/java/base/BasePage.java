@@ -2,20 +2,36 @@ package base;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.time.Duration;
+import java.util.Properties;
 
 public abstract class BasePage {
     protected AppiumDriver driver;
+    protected AndroidDriver androidDriver;
     protected WebDriverWait wait;
     protected AppiumBy appiumBy;
-        
-    public BasePage() {
+    protected Properties locators;
+    
+    public BasePage(AppiumDriver driver) {
         this.driver = DriverManager.getDriver();
+        this.driver = driver;
+        locators = new Properties();
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        try (FileInputStream fis = new FileInputStream("src/test/resources/locators.properties")) {
+            locators.load(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+    
     protected void waitForElementToBeVisible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }

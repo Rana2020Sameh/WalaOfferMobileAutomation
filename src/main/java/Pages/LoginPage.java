@@ -1,10 +1,20 @@
 package Pages;
 
 import base.BasePage;
-import org.openqa.selenium.WebElement;
+import io.appium.java_client.AppiumDriver;
 
-public class LoginPage extends BasePage {
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+
+public class LoginPage<MobileElement> extends BasePage {
     
+    public LoginPage(AppiumDriver driver) {
+        super(driver);
+        PageFactory.initElements(driver, this);
+
+    }
+
     // Flutter element locators using keys
     private static final String EMAIL_FIELD_KEY = "email_field";
     private static final String MOBILENUMBER_FIELD_KEY="mobile_number";
@@ -17,9 +27,19 @@ public class LoginPage extends BasePage {
     private static final String NEXT_BUTTON="newx_button";
     private static final String LOGIN_BUTTON="login_button";
     
+
+    public void enterMobileNumber(String number) {
+        //to read xpath value for mobile number filed from Locators Properties file
+        String MobileFileLocator=locators.getProperty("mobileNm");
+        WebElement  mobileNumberField =  driver.findElement(By.xpath(MobileFileLocator));
+        mobileNumberField.click();
+        mobileNumberField.sendKeys(number);
+    }
+    
     public void enterEmail(String email) {
         WebElement emailField = findFlutterElement("key", EMAIL_FIELD_KEY);
         sendText(emailField, email);
+    }
     }
     
     public void enterPassword(String password) {

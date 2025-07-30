@@ -1,0 +1,7 @@
+{
+    "loginPage": {
+      "loginButton": "//*[@content-desc='Login']",
+      "usernameField": "//*[@text='Username']",
+      "passwordField": "//*[@text='Password']"
+    }
+  }
