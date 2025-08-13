@@ -14,10 +14,10 @@ import Pages.HomePage;
 import Pages.LoginPage;
 
 import java.util.List;
-
+@Test
 public class LoginTests extends BaseTest {
     private LoginPage loginPage;
-    private SoftAssert softAssert;
+  //  private SoftAssert softAssert;
 
     @Test
     public void loginUserWithValidCredintials(String mobileNo) {
